@@ -33,7 +33,21 @@ h1 {
   flex-wrap: wrap;
   justify-content: center;
 }
+.proxy-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 1rem;
+  color: #555;
+  cursor: pointer;
+}
 
+.proxy-option input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: #4caf50;
+}
 #urlInput {
   flex: 1;
   min-width: 300px;
