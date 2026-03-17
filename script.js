@@ -54,14 +54,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     currentUrl = url;
 
-    // 智能判断 X/Twitter 自动启用中转
+    // 自动判断 X.com / twitter.com 链接，强制中转
     const isXSite = url.includes('x.com') || url.includes('twitter.com');
     if (isXSite) {
       useProxyCheckbox.checked = true;
     }
 
     const useProxy = useProxyCheckbox.checked;
-    
+
     if (useProxy) {
       const proxyUrl = PROXY_BASE + encodeURIComponent(url);
       loadIframe(proxyUrl, true);
@@ -70,26 +70,35 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // ------------------ 新增：支持 ?url= 参数自动加载 ------------------
+  // ── 支持直接通过 ?url= 参数打开预览 ──
   function handleQueryParam() {
     const params = new URLSearchParams(window.location.search);
     const sharedUrl = params.get('url');
-    
+
     if (sharedUrl) {
-      // 解码并填入输入框
-      const decodedUrl = decodeURIComponent(sharedUrl);
-      urlInput.value = decodedUrl;
-      
-      // 自动触发预览（你可以改成 false，只填入不自动加载）
-      const autoPreview = true;  
-      
-      if (autoPreview) {
-        loadPreview(true);  // true 表示自动模式，不弹 alert
+      let target = decodeURIComponent(sharedUrl);
+
+      // 如果是嵌套的 Worker 链接，尝试提取最内层的真实目标网址
+      if (target.includes('?url=')) {
+        const innerParams = new URLSearchParams(target.split('?')[1] || '');
+        const innerUrl = innerParams.get('url');
+        if (innerUrl) {
+          target = decodeURIComponent(innerUrl);
+        }
       }
+
+      // 填入输入框
+      urlInput.value = target;
+
+      // 自动勾选中转（因为带 ?url= 通常希望能成功显示）
+      useProxyCheckbox.checked = true;
+
+      // 自动触发预览（不弹 alert）
+      loadPreview(true);
     }
   }
 
-  // 页面加载完成后检查查询参数
+  // 页面加载时立即检查是否有 ?url= 参数
   handleQueryParam();
 
   // 事件绑定
