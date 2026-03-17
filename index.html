@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>网页预览喵 ｜ 安全沙盒 + 中转</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="container">
+    <h1>网页预览器喵喵 ♡</h1>
+    
+    <div class="input-area">
+      <input type="url" 
+             id="urlInput" 
+             placeholder="https://example.com 或 www.waterchisato.top" 
+             autocomplete="off">
+      <button id="previewBtn">预览一下！</button>
+    </div>
+
+    <div id="placeholder" class="placeholder">
+      请输入链接喵喵～ (๑•̀ㅂ•́)و✧
+    </div>
+
+    <div id="errorMsg" class="error-msg" style="display:none;">
+      <p>喵呜～加载失败啦！<br>很大可能是网站设置了严格的 CSP 或 X-Frame-Options，不允许被 iframe 嵌入哦～<br>常见错误：net::ERR_BLOCKED_BY_CSP</p>
+      
+      <p style="margin: 1.5rem 0; font-weight: bold; color: #d32f2f; line-height: 1.6;">
+        <strong>重要提醒：</strong><br>
+        使用中转预览会通过 <strong>境外网络（Cloudflare Workers）</strong> 访问目标网站。<br>
+        这可能会导致：<br>
+        • IP 地址显示为境外<br>
+        • 网络路径改变<br>
+        • 部分网站可能识别为代理访问或限制功能<br>
+        请确认你了解并接受这些情况后再继续喵～ ♡
+      </p>
+      
+      <div class="buttons">
+        <button id="tryProxyBtn">我了解了，继续中转预览～谁也不能阻止我～</button>
+        <button id="openNewTabBtn">直接在新标签打开原站喵</button>
+        <button id="cancelProxyBtn">算了，先返回喵</button>
+      </div>
+    </div>
+
+    <iframe 
+      id="previewFrame"
+      sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox allow-top-navigation-by-user-activation"
+      frameborder="0"
+      style="display: none;">
+    </iframe>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

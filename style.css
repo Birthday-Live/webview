@@ -1,0 +1,154 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #f0f4ff 0%, #e0eaff 100%);
+  min-height: 100vh;
+  padding: 20px;
+  color: #333;
+}
+
+.container {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #5c6bc0;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.input-area {
+  display: flex;
+  gap: 12px;
+  max-width: 800px;
+  margin: 0 auto 2.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+#urlInput {
+  flex: 1;
+  min-width: 300px;
+  padding: 14px 20px;
+  font-size: 1.1rem;
+  border: 2px solid #bbdefb;
+  border-radius: 12px;
+  outline: none;
+  transition: 0.25s;
+}
+
+#urlInput:focus {
+  border-color: #3f51b5;
+  box-shadow: 0 0 0 4px rgba(63, 81, 181, 0.2);
+}
+
+#previewBtn {
+  padding: 0 32px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: white;
+  background: #3f51b5;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+#previewBtn:hover {
+  background: #303f9f;
+  transform: translateY(-2px);
+}
+
+#previewFrame {
+  width: 100%;
+  height: 78vh;
+  min-height: 520px;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+  background: white;
+  border: 1px solid #e3f2fd;
+}
+
+.placeholder {
+  height: 78vh;
+  min-height: 520px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.6rem;
+  color: #78909c;
+  font-weight: 500;
+  border: 3px dashed #bbdefb;
+}
+
+.error-msg {
+  height: 78vh;
+  min-height: 520px;
+  background: #ffebee;
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2.5rem;
+  text-align: center;
+  font-size: 1.18rem;
+  color: #c62828;
+  border: 3px dashed #ef9a9a;
+}
+
+.error-msg p {
+  margin-bottom: 1.8rem;
+  line-height: 1.7;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  justify-content: center;
+}
+
+.error-msg button {
+  padding: 12px 32px;
+  font-size: 1.08rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.2s;
+  min-width: 180px;
+}
+
+#tryProxyBtn {
+  background: #4caf50;
+  color: white;
+}
+
+#tryProxyBtn:hover { background: #388e3c; }
+
+#openNewTabBtn {
+  background: #2196f3;
+  color: white;
+}
+
+#openNewTabBtn:hover { background: #1976d2; }
+
+#cancelProxyBtn {
+  background: #757575;
+  color: white;
+}
+
+#cancelProxyBtn:hover { background: #616161; }
