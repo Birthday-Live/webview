@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>有人送你东西！</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f1a;
+      color: #e0e0ff;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    h1 {
+      font-size: 4.8rem;
+      margin: 0.4em 0 0.6em;
+      text-shadow: 0 0 40px #a78bfa;
+      letter-spacing: 0.08em;
+      background: linear-gradient(90deg, #c084fc, #a78bfa, #7dd3fc);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .preview-container {
+      width: 92%;
+      max-width: 1000px;
+      height: 68vh;
+      border: 2px solid #6b7280;
+      border-radius: 16px;
+      overflow: hidden;
+      background: #111827;
+      box-shadow: 0 25px 50px -12px rgba(0,0,0,0.6);
+    }
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+    .fallback {
+      margin-top: 1.5rem;
+      font-size: 1.1rem;
+      color: #9ca3af;
+    }
+    .fallback a {
+      color: #a78bfa;
+      text-decoration: none;
+      border-bottom: 1px solid #a78bfa80;
+      transition: all 0.2s;
+    }
+    .fallback a:hover {
+      color: #c084fc;
+      border-color: #c084fc;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>有人送你东西！</h1>
+
+  <div class="preview-container">
+    <iframe id="giftPreview" sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-downloads"></iframe>
+  </div>
+
+  <div class="fallback">
+    如果没有反应，请点击
+    <a id="fallbackLink" href="#" target="_blank">这里</a>
+    访问原界面
+  </div>
+
+  <script>
+    // 获取 ?url= 后面的内容
+    function getQueryParam(name) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(name);
+    }
+
+    const giftUrl = getQueryParam("url");
+
+    if (giftUrl) {
+      // 做最基本的安全过滤（可选但建议做）
+      let safeUrl = giftUrl.trim();
+      if (!safeUrl.match(/^https?:\/\//)) {
+        safeUrl = "https://" + safeUrl;
+      }
+
+      // 设置 iframe
+      document.getElementById("giftPreview").src = safeUrl;
+
+      // 设置 fallback 链接
+      document.getElementById("fallbackLink").href = safeUrl;
+      document.getElementById("fallbackLink").textContent = safeUrl.length > 60 
+        ? safeUrl.substring(0,57) + "..." 
+        : safeUrl;
+    } else {
+      // 没有 ?url= 参数时的默认提示
+      document.getElementById("giftPreview").outerHTML = 
+        '<div style="height:100%;display:flex;align-items:center;justify-content:center;color:#9ca3af;font-size:1.4rem;">请在网址后加上 ?url=你要展示的网页地址</div>';
+      document.querySelector(".fallback").style.display = "none";
+    }
+  </script>
+
+</body>
+</html>
