@@ -9,7 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const openNewTabBtn = document.getElementById('openNewTabBtn');
   const useProxyCheckbox = document.getElementById('useProxyCheckbox');
 
-  const PROXY_BASE = 'https://webview.xuanxuan860429.workers.dev/?url=';
+  const PROXY_BASE = 'https://webview.chisato.org.cn?url=';
 
   let currentUrl = '';
 
@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
       urlInput.value = target;
 
       // 自动勾选中转（因为带 ?url= 通常希望能成功显示）
-      useProxyCheckbox.checked = true;
+      useProxyCheckbox.checked = false;
 
       // 自动触发预览（不弹 alert）
       loadPreview(true);
